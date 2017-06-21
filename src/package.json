@@ -1,0 +1,70 @@
+{
+  "name": "ng2-select2-bootstrap",
+  "version": "0.1.38",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/username/repo"
+  },
+  "author": {
+    "name": "lucas vieceli",
+    "email": "vieceli46@hotmail.com"
+  },
+  "keywords": [
+    "angular2",
+    "select2",
+    "bootstrap"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/username/repo/issues"
+  },
+  "module": "ng2-select2-bootstrap.js",
+  "typings": "ng2-select2-bootstrap.d.ts",
+  "peerDependencies": {
+    "@angular/common": "~4.2.3",
+    "@angular/compiler": "~4.2.3",
+    "@angular/compiler-cli": "^4.2.3",
+    "@angular/core": "~4.2.3",
+    "@angular/forms": "~4.2.3",
+    "@angular/http": "~4.2.3",
+    "@angular/platform-browser": "~4.2.3",
+    "@angular/platform-browser-dynamic": "~4.2.3",
+    "@angular/platform-server": "^4.2.3",
+    "@angular/router": "~4.2.3",
+    "@angular/upgrade": "4.2.3",
+    "@compodoc/compodoc": "^1.0.0-beta.7",
+    "@types/es6-shim": "^0.31.32",
+    "@types/jasmine": "^2.5.40",
+    "@types/protractor": "^4.0.0",
+    "@types/selenium-webdriver": "^3.0.4",
+    "angular2-in-memory-web-api": "0.0.21",
+    "codelyzer": "^3.1.1",
+    "ie-shim": "^0.1.0",
+    "reflect-metadata": "^0.1.8",
+    "rxjs": "5.4.1",
+    "tslint": "^5.4.3",
+    "typescript": "2.3.4",
+    "zone.js": "^0.8.12",
+    "@types/node": "~6.0.60",
+    "core-js": "^2.4.1",
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-rollup": "^2.11.0",
+    "jasmine-core": "~2.5.2",
+    "jasmine-spec-reporter": "~3.2.0",
+    "karma": "~1.4.1",
+    "karma-chrome-launcher": "~2.0.0",
+    "karma-cli": "~1.0.1",
+    "karma-coverage-istanbul-reporter": "^0.2.0",
+    "karma-jasmine": "~1.1.0",
+    "karma-jasmine-html-reporter": "^0.2.2",
+    "node-sass": "^4.5.2",
+    "node-sass-tilde-importer": "^1.0.0",
+    "node-watch": "^0.5.2",
+    "protractor": "~5.1.0",
+    "rollup": "^0.41.6",
+    "run-sequence": "^1.2.2",
+    "ts-node": "~2.0.0"
+  }
+}
