@@ -69,4 +69,4 @@ $ npm run lint
 
 ## License
 
-MIT © [lucas vieceli](mailto:vieceli46@hotmail.com)
+MIT © [Lucas Vieceli](mailto:vieceli46@hotmail.com)

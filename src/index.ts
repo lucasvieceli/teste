@@ -1,19 +1,24 @@
 import {NgModule, ModuleWithProviders} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
-import {
-    SelectComponent,
-    MultipleComponent,
-    RequestComponent,
-    RequestMultipleComponent
-} from './component';
-import {InnerTemplateDirective, HighlightDirective, InfiniteScrollDirective} from './directive';
-import {SelectService} from './service';
+import {MultipleComponent} from './component/multiple.component';
+import {RequestComponent} from './component/request.component';
+import {RequestMultipleComponent} from './component/request-multiple.component';
+import {SelectComponent} from './component/select.component';
+import {HighlightDirective} from './directive/highlight.directive';
+import {InfiniteScrollDirective} from './directive/infinite-scroll.directive';
+import {InnerTemplateDirective} from './directive/inner-template.directive';
+import {SelectService} from './service/select.service';
 
-export * from './component/index';
-export * from './common/index';
-export * from './directive/index';
-export * from './service/index';
+export {MultipleComponent} from './component/multiple.component';
+export {RequestComponent} from './component/request.component';
+export {RequestMultipleComponent} from './component/request-multiple.component';
+export {SelectComponent} from './component/select.component';
+export {Select} from './common/select';
+export {HighlightDirective} from './directive/highlight.directive';
+export {InfiniteScrollDirective} from './directive/infinite-scroll.directive';
+export {InnerTemplateDirective} from './directive/inner-template.directive';
+export {SelectService} from './service/select.service';
 
 @NgModule({
   imports     : [

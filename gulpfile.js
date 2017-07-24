@@ -13,6 +13,7 @@ const srcFolder = path.join(rootFolder, 'src');
 const tmpFolder = path.join(rootFolder, '.tmp');
 const buildFolder = path.join(rootFolder, 'build');
 const distFolder = path.join(rootFolder, 'dist');
+const crmFolder = path.join(rootFolder, '../crm/teste8/node_modules/ng2-select2-bootstrap');
 
 /**
  * 1. Delete /dist folder
@@ -152,7 +153,16 @@ gulp.task('copy:build', function () {
   return gulp.src([`${buildFolder}/**/*`, `!${buildFolder}/**/*.js`])
     .pipe(gulp.dest(distFolder));
 });
+gulp.task('clean:crm', function () {
 
+    // Delete contents but not dist folder to avoid broken npm links
+    // when dist directory is removed while npm link references it.
+    return deleteFolders([crmFolder + '/**', '!' + crmFolder]);
+});
+gulp.task('copy:crm', function () {
+    return gulp.src([`${distFolder}/**/*`])
+        .pipe(gulp.dest(crmFolder));
+});
 /**
  * 8. Copy package.json from /src to /dist
  */
@@ -196,6 +206,7 @@ gulp.task('compile', function () {
     'copy:readme',
     'clean:build',
     'clean:tmp',
+    'copy:crm',
     function (err) {
       if (err) {
         console.log('ERROR:', err.message);

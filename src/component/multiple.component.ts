@@ -3,11 +3,72 @@ import {
     TemplateRef,  ViewChild
 } from '@angular/core';
 import {Select} from './../common/select';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 
 @Component({
     selector    : 'select2-multiple',
-    templateUrl : 'multiple.component.html',
+    template : `
+        <!--select simples-->
+        <span [ngClass]="getClassGeral()" dir="ltr" (click)="abrir()">
+        <span class="selection">
+            <span class="select2-selection select2-selection--multiple" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="-1">
+            <ul class="select2-selection__rendered">
+                <li [hidden]="data" [innerHtml]="placeholder"  class="select2-selection__placeholder"></li>
+                <span [hidden]="!data" >
+                    <span [inner-template]="templateSelecionado || templateSelecionadoInterno" [item]="this"></span>
+                </span>
+                <li class="select2-selection__arrow" role="presentation"><b role="presentation"></b></li>
+            </ul>
+        </span>
+        </span>
+        <span class="dropdown-wrapper" aria-hidden="true"></span>
+    </span>
+
+        <!--quando clicar campo-->
+        <div [hidden]="!aberto">
+        <span class="select2-container select2-container--bootstrap select2-container--open">
+            <span class="select2-dropdown select2-dropdown--below" dir="ltr" >
+                <span class="select2-search select2-search--dropdown">
+                    <input (keyup)="keyup($event.target.value)" #campoBusca placeholder="Digite algo" autofocus class="select2-search__field" type="search" tabindex="0" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" role="textbox">
+                </span>
+                <span class="select2-results">
+                    <ul class="select2-results__options" role="tree"  aria-expanded="true" aria-hidden="false">
+                        <span [hidden]="exibirMensagemCaracteresMinimo">
+                            <span [hidden]="valoresExibir.length == 0" >
+                                <li *ngFor="let item of valoresExibir" (click)="selecionar(item)" class="select2-results__option" highlight="select2-results__option--highlighted" role="treeitem" [attr.aria-selected]="((_value) && (item[indiceId] == _value[indiceId])) ? true : false">
+                                    <span  [inner-template]="templateResultado || templateResultadoInterno" [item]="item"></span>
+                                </li>
+                            </span>
+                            <li [hidden]="valoresExibir.length > 0" class="select2-results__option select2-results__message" aria-live="assertive">
+                                <span  [inner-template]="templateSemResultado || templateSemResultadoInterno" [item]="{pesquisa:valorPesquisado}"></span>
+                            </li>
+                        </span>
+                        <li [hidden]="exibirMensagemCaracteresMinimo == false" class="select2-results__option select2-results__message">
+                            Digite {{minimoCaracteres}} ou mais caracteres para realizar a busca
+                        </li>
+                    </ul>
+                </span>
+            </span>
+        </span>
+        </div>
+
+
+
+        <ng-template #templateSemResultadoInterno>
+            Nenhum resultado encontrado
+        </ng-template>
+        <ng-template #templateResultadoInterno let-valor>
+            {{valor[indiceNome]}}
+        </ng-template>
+        <ng-template #templateSelecionadoInterno let-valor>
+        <span *ngIf="valor">
+            <li *ngFor="let item of valor.data" class="select2-selection__choice">
+                <span class="select2-selection__choice__remove" role="presentation" (click)="valor.remove(item, $event)">×</span>
+                {{item[indiceNome]}}
+            </li>
+        </span>
+        </ng-template>
+    `,
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
@@ -24,10 +85,10 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 export class MultipleComponent extends Select implements ControlValueAccessor{
 
 
-    @Input() name                     : any = '';
-    @Input() classe                   : any = '';
-    @Input() placeholder              : string = 'Selecione';
-    @Input() minimoCaracteres         : number = 0;
+    @Input() name: any = '';
+    @Input() classe: any = '';
+    @Input() placeholder: string = 'Selecione';
+    @Input() minimoCaracteres: number = 0;
     @Input() templateResultado        : TemplateRef<any>;
     @Input() templateSelecionado      : TemplateRef<any>;
     @Input() templateSemResultado     : TemplateRef<any>;
@@ -48,7 +109,6 @@ export class MultipleComponent extends Select implements ControlValueAccessor{
     @Output() onLimpar          = new EventEmitter<any>();
     @ViewChild('campoBusca') campoBusca : ElementRef;
 
-
     constructor(
         public elementRef   : ElementRef,
         public zone         : NgZone
@@ -56,13 +116,11 @@ export class MultipleComponent extends Select implements ControlValueAccessor{
         super(elementRef, zone);
     }
 
-    
-    abrir(){
-        if(this.disabled){
+    abrir() {
+        if (this.disabled){
             return false;
         }
-        
-        if(this.aberto) {
+        if (this.aberto) {
             this.fechar();
         }else{
             this.aberto = true;
